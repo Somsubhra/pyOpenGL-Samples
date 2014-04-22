@@ -40,6 +40,18 @@ torso_angle_ud = 0
 # Torso angle horizontally(left/right)
 torso_angle_lr = 0
 
+# Left leg angle vertically(up/down)
+left_leg_ud = 0
+
+# Right leg angle vertically(up/down)
+right_leg_ud = 0
+
+# Left knee angle vertically(up/down)
+left_knee_ud = 0
+
+# Right knee angle vertically(up/down)
+right_knee_ud = 0
+
 
 def display_humanoid():
 
