@@ -12,11 +12,6 @@ class Humanoid:
 
     # Constructor for the humanoid class
     def __init__(self):
-        # Head angle horizontally(left/right)
-        self.head_angle_lr = 0
-
-        # Head angle vertically(up/down)
-        self.head_angle_ud = 0
 
         # Neck angle horizontally
         self.neck_angle_lr = 0
@@ -59,6 +54,40 @@ class Humanoid:
 
         # Right knee angle vertically(up/down)
         self.right_knee_ud = 0
+
+        # Radius of the head
+        self.head_radius = 10
+
+        # Radius of the torso
+        self.torso_radius = 10
+
+        # Torso length
+        self.torso_length = 50
+
+        # Upper arm length
+        self.upper_arm_length = 20
+
+        # Lower arm length
+        self.lower_arm_length = 15
+
+        # Upper arm width
+        self.upper_arm_width = 5
+
+        # Lower arm width
+        self.lower_arm_width = 3
+
+        # Upper leg length
+        self.upper_leg_length = 25
+
+        # Lower leg length
+        self.lower_leg_length = 20
+
+        # Upper leg width
+        self.upper_leg_width = 7
+
+        # Lower leg width
+        self.lower_leg_width = 5
+
 
     # The display function for the humanoid
     def display(self):
