@@ -23,19 +23,38 @@ class Cube:
     def display(self):
         glClear(GL_COLOR_BUFFER_BIT)
 
-        eqn = [1, 1, 1, 2.6]
+        eqn = [-1.0, 0.0, 0.0, 0.0]
+        eqn1 = [1.0, 1.0, 1.0, 1.25]
+        eqn2 = [1.0, -1.0, 1.0, 1.25]
+        eqn3 = [1.0, 1.0, -1.0, 1.25]
+        eqn4 = [1.0, -1.0, -1.0, 1.25]
+        eqn5 = [-1.0, 1.0, 1.0, 1.25]
 
         glColor3f(1.0, 1.0, 1.0)
         glLoadIdentity()
         gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
 
-        glClipPlane(GL_CLIP_PLANE0, eqn)
-        glEnable(GL_CLIP_PLANE0)
-
         glScalef(self.scale, self.scale, self.scale)
         glRotatef(self.rotate_y, 0.0, 1.0, 0.0)
         glRotatef(self.rotate_x, 1.0, 0.0, 0.0)
+
         glutSolidCube(1.0)
+
+        glClipPlane(GL_CLIP_PLANE0, eqn1)
+        glEnable(GL_CLIP_PLANE0)
+
+        glClipPlane(GL_CLIP_PLANE1, eqn2)
+        glEnable(GL_CLIP_PLANE1)
+
+        glClipPlane(GL_CLIP_PLANE2, eqn3)
+        glEnable(GL_CLIP_PLANE2)
+
+        glClipPlane(GL_CLIP_PLANE3, eqn4)
+        glEnable(GL_CLIP_PLANE3)
+
+        glClipPlane(GL_CLIP_PLANE4, eqn5)
+        glEnable(GL_CLIP_PLANE4)
+
         glColor3f(1.0, 0.0, 0.0)
         glutWireCube(1.0)
         glFlush()
