@@ -59,38 +59,38 @@ class Humanoid:
         self.head_radius = 10
 
         # Radius of the torso
-        self.torso_radius = 10
+        self.torso_radius = 0.1
 
         # Torso length
-        self.torso_length = 50
+        self.torso_length = 0.4
 
         # Upper arm length
-        self.upper_arm_length = 20
+        self.upper_arm_length = 0.2
 
         # Lower arm length
-        self.lower_arm_length = 15
+        self.lower_arm_length = 0.03
 
         # Upper arm width
-        self.upper_arm_width = 5
+        self.upper_arm_width = 0.2
 
         # Lower arm width
-        self.lower_arm_width = 3
+        self.lower_arm_width = 0.05
 
         # Upper leg length
-        self.upper_leg_length = 25
+        self.upper_leg_length = 0.2
 
         # Lower leg length
-        self.lower_leg_length = 20
+        self.lower_leg_length = 0.2
 
         # Upper leg width
-        self.upper_leg_width = 7
+        self.upper_leg_width = 0.08
 
         # Lower leg width
-        self.lower_leg_width = 5
-
+        self.lower_leg_width = 0.06
 
     # The display function for the humanoid
     def display(self):
+
         # Enable the Depth test
         glEnable(GL_DEPTH_TEST)
 
@@ -102,6 +102,30 @@ class Humanoid:
 
         # Load the identity matrix
         glLoadIdentity()
+
+    # Display the head of humanoid
+    def display_head(self):
+        pass
+
+    # Display the torso of humanoid
+    def display_torso(self):
+        pass
+
+    # Display the upper arm of humanoid
+    def display_upper_arm(self):
+        pass
+
+    # Display the lower arm of humanoid
+    def display_lower_arm(self):
+        pass
+
+    # Display the upper leg of humanoid
+    def display_upper_leg(self):
+        pass
+
+    # Display the lower leg of humanoid
+    def display_lower_leg(self):
+        pass
 
     # Te keyboard controls for the humanoid
     def controls(self):
