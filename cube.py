@@ -22,12 +22,21 @@ class Cube:
     # The display function
     def display(self):
         glClear(GL_COLOR_BUFFER_BIT)
+
+        eqn = [1, 1, 1, 2.6]
+
         glColor3f(1.0, 1.0, 1.0)
         glLoadIdentity()
         gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
+
+        glClipPlane(GL_CLIP_PLANE0, eqn)
+        glEnable(GL_CLIP_PLANE0)
+
         glScalef(self.scale, self.scale, self.scale)
         glRotatef(self.rotate_y, 0.0, 1.0, 0.0)
         glRotatef(self.rotate_x, 1.0, 0.0, 0.0)
+        glutSolidCube(1.0)
+        glColor3f(1.0, 0.0, 0.0)
         glutWireCube(1.0)
         glFlush()
 
