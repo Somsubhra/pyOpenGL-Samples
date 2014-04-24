@@ -20,16 +20,17 @@ class Sphere:
     # Constructor for the sphere class
     def __init__(self, radius):
         self.radius = radius
-        self.lats = 10
-        self.longs = 10
+        self.lats = 100
+        self.longs = 100
         self.user_theta = 0
         self.user_height = 0
         self.direction = [0.0, 2.0, -1.0, 1.0]
         self.intensity = [0.7, 0.7, 0.7, 1.0]
         self.ambient_intensity = [0.3, 0.3, 0.3, 1.0]
+        self.surface = GL_FLAT
 
     def init(self):
-        glClearColor(1.0, 1.0, 1.0, 0.0)
+        glClearColor(0.0, 0.0, 0.0, 0.0)
         self.compute_location()
         glEnable(GL_DEPTH_TEST)
         glEnable(GL_LIGHTING)
@@ -55,25 +56,25 @@ class Sphere:
     def display(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glColor3f(1.0, 1.0, 1.0)
-        glShadeModel(GL_SMOOTH)
+        glShadeModel(self.surface)
         self.draw()
         glutSwapBuffers()
 
     # Draw the sphere
     def draw(self):
         for i in range(0, self.lats + 1):
-            lat0 = pi * (-0.5 + float((i - 1) / self.lats))
+            lat0 = pi * (-0.5 + float(float(i - 1) / float(self.lats)))
             z0 = sin(lat0)
             zr0 = cos(lat0)
 
-            lat1 = pi * (-0.5 + float(i / self.lats))
+            lat1 = pi * (-0.5 + float(float(i) / float(self.lats)))
             z1 = sin(lat1)
             zr1 = cos(lat1)
 
             glBegin(GL_QUAD_STRIP)
 
             for j in range(0, self.longs + 1):
-                lng = 2 * pi * float((j - 1) / self.longs)
+                lng = 2 * pi * float(float(j - 1) / float(self.longs))
                 x = cos(lng)
                 y = sin(lng)
                 glNormal3f(x * zr0, y * zr0, z0)
@@ -92,6 +93,12 @@ class Sphere:
             self.user_theta += 0.1
         if key == GLUT_KEY_RIGHT:
             self.user_theta -= 0.1
+        if key == GLUT_KEY_F1:
+            if self.surface == GL_FLAT:
+                self.surface = GL_SMOOTH
+            else:
+                self.surface = GL_FLAT
+
         self.compute_location()
         glutPostRedisplay()
 
