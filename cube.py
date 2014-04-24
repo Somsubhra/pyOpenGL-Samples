@@ -55,6 +55,9 @@ class Cube:
         glClipPlane(GL_CLIP_PLANE4, eqn5)
         glEnable(GL_CLIP_PLANE4)
 
+        glClipPlane(GL_CLIP_PLANE5, eqn)
+        glEnable(GL_CLIP_PLANE5)
+
         glColor3f(1.0, 0.0, 0.0)
         glutWireCube(1.0)
         glFlush()
