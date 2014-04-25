@@ -283,7 +283,7 @@ class Humanoid:
         glRotatef(self.right_leg_angle_ud, 1.0, 0.0, 0.0)
         self.display_upper_leg()
 
-        # Draw left lwer leg
+        # Draw left lower leg
         glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.left_lower_leg_y, 0.0)
         glRotatef(self.right_knee_angle_ud, 1.0, 0.0, 0.0)
