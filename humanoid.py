@@ -20,10 +20,10 @@ class Humanoid:
         self.neck_angle_ud = 0
 
         # Right Shoulder angle vertically(up/down)
-        self.right_shoulder_angle_ud = 90
+        self.right_shoulder_angle_ud = 160
 
         # Left Shoulder angle vertically(up/down)
-        self.left_shoulder_angle_ud = 90
+        self.left_shoulder_angle_ud = 160
 
         # Right Ankle angle vertically
         self.right_ankle_angle_ud = 0
@@ -53,10 +53,10 @@ class Humanoid:
         self.torso_length = 0.4
 
         # Upper arm length
-        self.upper_arm_length = 0.2
+        self.upper_arm_length = 0.15
 
         # Lower arm length
-        self.lower_arm_length = 0.2
+        self.lower_arm_length = 0.15
 
         # Upper arm width
         self.upper_arm_width = 0.05
@@ -124,6 +124,14 @@ class Humanoid:
 
         self.p = None
 
+        self.direction = [-4.0, 2.0, -1.0, 1.0]
+
+        self.intensity = [0.7, 0.7, 0.0, 0.25]
+
+        self.ambient_intensity = [0.3, 0.3, 0.0, 0.25]
+
+        self.dir = 'front'
+
     def init(self):
         self.p = gluNewQuadric()
 
@@ -136,6 +144,14 @@ class Humanoid:
         glLoadIdentity()
 
         gluPerspective(30, 1.0, 0.0, 100.0)
+
+        glEnable(GL_LIGHTING)
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, self.ambient_intensity)
+        glEnable(GL_LIGHT0)
+        glLightfv(GL_LIGHT0, GL_POSITION, self.direction)
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, self.intensity)
+        glEnable(GL_COLOR_MATERIAL)
+        glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE)
 
     # The display function for the humanoid
     def display(self):
@@ -159,48 +175,57 @@ class Humanoid:
         self.display_torso()
         glPushMatrix()
 
+        glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.head_x, 0.0)
         glRotatef(self.neck_angle_ud, 1.0, 0.0, 0.0)
         glRotatef(self.neck_angle_lr, 0.0, 1.0, 0.0)
         glTranslatef(0.0, self.head_y, 0.0)
         self.display_head()
 
+        glColor3f(0.0, 1.0, 0.0)
         glPopMatrix()
         glPushMatrix()
         glTranslatef(self.left_upper_arm_x, self.left_upper_arm_y, 0.0)
         glRotatef(self.left_shoulder_angle_ud, 1.0, 0.0, 0.0)
         self.display_upper_arm()
 
+        glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.left_lower_arm_y, 0.0)
         glRotatef(self.left_ankle_angle_ud, 1.0, 0.0, 0.0)
         self.display_lower_arm()
 
+        glColor3f(0.0, 1.0, 0.0)
         glPopMatrix()
         glPushMatrix()
         glTranslatef(self.right_upper_arm_x, self.right_upper_arm_y, 0.0)
         glRotatef(self.right_shoulder_angle_ud, 1.0, 0.0, 0.0)
         self.display_upper_arm()
 
+        glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.right_lower_arm_y, 0.0)
         glRotatef(self.right_ankle_angle_ud, 1.0, 0.0, 0.0)
         self.display_lower_arm()
 
+        glColor3f(0.0, 1.0, 0.0)
         glPopMatrix()
         glPushMatrix()
         glTranslatef(self.left_upper_leg_x, self.left_upper_leg_y, 0.0)
         glRotatef(self.left_leg_angle_ud, 1.0, 0.0, 0.0)
         self.display_upper_leg()
 
+        glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.left_lower_leg_y, 0.0)
         glRotatef(self.left_knee_angle_ud, 1.0, 0.0, 0.0)
         self.display_lower_leg()
 
+        glColor3f(0.0, 1.0, 0.0)
         glPopMatrix()
         glPushMatrix()
         glTranslatef(self.right_upper_leg_x, self.right_upper_leg_y, 0.0)
         glRotatef(self.right_leg_angle_ud, 1.0, 0.0, 0.0)
         self.display_upper_leg()
 
+        glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.left_lower_leg_y, 0.0)
         glRotatef(self.right_knee_angle_ud, 1.0, 0.0, 0.0)
         self.display_lower_leg()
@@ -217,7 +242,7 @@ class Humanoid:
     def display_head(self):
         glPushMatrix()
         glRotatef(90, 1.0, 0.0, 0.0)
-        glutWireSphere(0.1, 100, 100)
+        glutSolidSphere(0.1, 100, 100)
         glPopMatrix()
 
     # Display the torso of humanoid
@@ -261,7 +286,24 @@ class Humanoid:
 
     # Te keyboard controls for the humanoid
     def controls(self, key, x, y):
-        pass
+        if key == 'w':
+            if self.left_leg_angle_ud == 210:
+                self.dir = 'back'
+            if self.left_leg_angle_ud == 150:
+                self.dir = 'front'
+
+            if self.dir == 'front':
+                self.left_leg_angle_ud += 1
+                self.left_knee_angle_ud += 0.75
+                self.right_leg_angle_ud -= 1
+                self.right_knee_angle_ud -= 0.75
+            else:
+                self.left_leg_angle_ud -= 1
+                self.left_knee_angle_ud -= 0.75
+                self.right_leg_angle_ud += 1
+                self.right_knee_angle_ud += 0.75
+
+        glutPostRedisplay()
 
 
 def main():
