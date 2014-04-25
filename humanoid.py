@@ -293,15 +293,23 @@ class Humanoid:
                 self.dir = 'front'
 
             if self.dir == 'front':
-                self.left_leg_angle_ud += 1
-                self.left_knee_angle_ud += 0.75
-                self.right_leg_angle_ud -= 1
-                self.right_knee_angle_ud -= 0.75
+                self.left_leg_angle_ud += 3
+                self.left_knee_angle_ud += 2
+                self.right_leg_angle_ud -= 3
+                self.right_knee_angle_ud -= 2
+                self.right_shoulder_angle_ud += 3
+                self.right_ankle_angle_ud += 2
+                self.left_shoulder_angle_ud -= 3
+                self.left_ankle_angle_ud -= 2
             else:
-                self.left_leg_angle_ud -= 1
-                self.left_knee_angle_ud -= 0.75
-                self.right_leg_angle_ud += 1
-                self.right_knee_angle_ud += 0.75
+                self.left_leg_angle_ud -= 3
+                self.left_knee_angle_ud -= 2
+                self.right_leg_angle_ud += 3
+                self.right_knee_angle_ud += 2
+                self.right_shoulder_angle_ud -= 3
+                self.right_ankle_angle_ud -= 2
+                self.left_shoulder_angle_ud += 3
+                self.left_ankle_angle_ud += 2
 
         glutPostRedisplay()
 
