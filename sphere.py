@@ -1,5 +1,10 @@
 # author: Somsubhra Bairi (201101056)
 
+# Draw sphere with QUAD_STRIP
+# Controls: UP/DOWN - scale up/down
+#           LEFT/RIGHT - rotate left/right
+#           F1 - Toggle surface as SMOOTH or FLAT
+
 # Python imports
 from math import *
 

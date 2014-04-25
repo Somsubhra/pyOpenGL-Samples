@@ -1,5 +1,11 @@
 # author: Somsubhra Bairi (201101056)
 
+# Draws a polyhedron by cutting corners of cube
+# Controls: UP - rotate up
+#           DOWN - rotate down
+#           LEFT - rotate left
+#           RIGHT - rotate right
+
 # OpenGL imports for python
 try:
     from OpenGL.GL import *

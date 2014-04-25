@@ -1,5 +1,8 @@
 # author: Somsubhra Bairi (201101056)
 
+# Draws a humanoid
+# Controls: w - Make the humanoid walk
+
 # OpenGL imports for python
 try:
     from OpenGL.GL import *
