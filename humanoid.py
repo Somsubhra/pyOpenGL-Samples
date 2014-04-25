@@ -1,3 +1,5 @@
+# author: Somsubhra Bairi (201101056)
+
 # OpenGL imports for python
 try:
     from OpenGL.GL import *
@@ -76,80 +78,123 @@ class Humanoid:
         # Lower leg width
         self.lower_leg_width = 0.06
 
+        # Shoulder width
         self.shoulder_width = 0.2
 
+        # Hip width
         self.hip_width = 0.2
 
+        # X coordinate of head
         self.head_x = 0.1
 
+        # Y coordinate of head
         self.head_y = self.torso_length
 
+        # X coordinate of left upper arm
         self.left_upper_arm_x = -self.torso_radius
 
+        # X coordinate of right upper arm
         self.right_upper_arm_x = self.torso_radius
 
+        # Y coordinate of left upper arm
         self.left_upper_arm_y = self.torso_length
 
+        # Y coordinate of right upper arm
         self.right_upper_arm_y = self.torso_length
 
+        # Y coordinate of left lower arm
         self.left_lower_arm_y = self.lower_arm_length
 
+        # Y coordinate of right lower arm
         self.right_lower_arm_y = self.lower_arm_length
 
+        # X coordinate of left upper leg
         self.left_upper_leg_x = -1.0 * self.hip_width / 2
 
+        # X coordinate of right upper leg
         self.right_upper_leg_x = self.hip_width / 2
 
+        # Y coordinate of left upper leg
         self.left_upper_leg_y = 0
 
+        # Y coordinate of right upper leg
         self.right_upper_leg_y = 0
 
+        # Y coordinate of left lower leg
         self.left_lower_leg_y = self.lower_leg_length
 
+        # Y coordinate of right lower leg
         self.right_lower_leg_y = self.lower_leg_length
 
+        # X coordinate of camera
         self.eye_x = 2.0
 
+        # Y coordinate of camera
         self.eye_y = 2.0
 
+        # Z coordinate of camera
         self.eye_z = 2.0
 
+        # The X coordinate of up vector
         self.up_x = 0.0
 
+        # The Y coordinate of up vector
         self.up_y = 1.0
 
+        # The Z coordinate of up vector
         self.up_z = 0.0
 
+        # The angle of view
         self.angle = 0.0
 
+        # The quadric
         self.p = None
 
+        # Direction of light
         self.direction = [-4.0, 2.0, -1.0, 1.0]
 
+        # Intensity of light
         self.intensity = [0.7, 0.7, 0.0, 0.25]
 
+        # The intensity of ambient light
         self.ambient_intensity = [0.3, 0.3, 0.0, 0.25]
 
+        # State of walk of humanoid
         self.dir = 'front'
 
+    # Initialize
     def init(self):
+
         self.p = gluNewQuadric()
 
         gluQuadricDrawStyle(self.p, GLU_LINE)
 
+        # Set background to black
         glClearColor(0.0, 0.0, 0.0, 0.0)
 
+        # Set matrix mode
         glMatrixMode(GL_PROJECTION)
 
+        # Reset matrix
         glLoadIdentity()
 
+        # Set the perspective
         gluPerspective(30, 1.0, 0.0, 100.0)
 
+        # Enable lighting of the scene
         glEnable(GL_LIGHTING)
+
+        # Set light model to ambient
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, self.ambient_intensity)
+
+        # Enable light number 0
         glEnable(GL_LIGHT0)
+
+        # Setup direction and intensity of light
         glLightfv(GL_LIGHT0, GL_POSITION, self.direction)
         glLightfv(GL_LIGHT0, GL_DIFFUSE, self.intensity)
+
+        # Set up the material
         glEnable(GL_COLOR_MATERIAL)
         glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE)
 
@@ -165,16 +210,19 @@ class Humanoid:
         # Load the identity matrix
         glLoadIdentity()
 
+        # Set the camera position
         self.change_camera_position(self.eye_x, self.eye_y, self.eye_z, self.up_x, self.up_y, self.up_z)
 
         glColor3f(0.75, 0.75, 0.75)
 
         glTranslatef(0.0, 0.0, self.angle)
 
+        # Draw the torso
         glRotatef(self.torso_angle_lr, 0.0, 1.0, 0.0)
         self.display_torso()
         glPushMatrix()
 
+        # Draw the head
         glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.head_x, 0.0)
         glRotatef(self.neck_angle_ud, 1.0, 0.0, 0.0)
@@ -182,6 +230,7 @@ class Humanoid:
         glTranslatef(0.0, self.head_y, 0.0)
         self.display_head()
 
+        # Draw left upper arm
         glColor3f(0.0, 1.0, 0.0)
         glPopMatrix()
         glPushMatrix()
@@ -189,11 +238,13 @@ class Humanoid:
         glRotatef(self.left_shoulder_angle_ud, 1.0, 0.0, 0.0)
         self.display_upper_arm()
 
+        # Draw left lower arm
         glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.left_lower_arm_y, 0.0)
         glRotatef(self.left_ankle_angle_ud, 1.0, 0.0, 0.0)
         self.display_lower_arm()
 
+        # Draw right upper arm
         glColor3f(0.0, 1.0, 0.0)
         glPopMatrix()
         glPushMatrix()
@@ -201,11 +252,13 @@ class Humanoid:
         glRotatef(self.right_shoulder_angle_ud, 1.0, 0.0, 0.0)
         self.display_upper_arm()
 
+        # Draw right lower arm
         glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.right_lower_arm_y, 0.0)
         glRotatef(self.right_ankle_angle_ud, 1.0, 0.0, 0.0)
         self.display_lower_arm()
 
+        # Draw left upper leg
         glColor3f(0.0, 1.0, 0.0)
         glPopMatrix()
         glPushMatrix()
@@ -213,11 +266,13 @@ class Humanoid:
         glRotatef(self.left_leg_angle_ud, 1.0, 0.0, 0.0)
         self.display_upper_leg()
 
+        # Draw left lower leg
         glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.left_lower_leg_y, 0.0)
         glRotatef(self.left_knee_angle_ud, 1.0, 0.0, 0.0)
         self.display_lower_leg()
 
+        # Draw right upper leg
         glColor3f(0.0, 1.0, 0.0)
         glPopMatrix()
         glPushMatrix()
@@ -225,6 +280,7 @@ class Humanoid:
         glRotatef(self.right_leg_angle_ud, 1.0, 0.0, 0.0)
         self.display_upper_leg()
 
+        # Draw left lwer leg
         glColor3f(1.0, 0.0, 0.0)
         glTranslatef(0.0, self.left_lower_leg_y, 0.0)
         glRotatef(self.right_knee_angle_ud, 1.0, 0.0, 0.0)
@@ -286,6 +342,7 @@ class Humanoid:
 
     # Te keyboard controls for the humanoid
     def controls(self, key, x, y):
+        # Walk action of humanoid
         if key == 'w':
             if self.left_leg_angle_ud == 210:
                 self.dir = 'back'
