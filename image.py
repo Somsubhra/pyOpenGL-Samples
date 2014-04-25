@@ -1,10 +1,12 @@
 # author: Somsubhra Bairi (201101056)
 
 # Draws an image of chessboard and saves it
-# Image is saved in out.jpg
+# Also applies an emboss filter to it and saves it
+# Images are saved in out.jpg and out1.jpg
 
 # Python imports
 from PIL import Image
+from PIL import ImageFilter
 import webbrowser
 
 
@@ -18,6 +20,9 @@ def main():
 
     # The output filename
     filename = "out.jpg"
+
+    # The second output image filename
+    filename1 = "out1.jpg"
 
     # Iterate through rows of image
     for i in range(img.size[0]):
@@ -33,6 +38,15 @@ def main():
 
     # Save the image
     img.save(filename)
+
+    # Apply emboss filter
+    img1 = img.filter(ImageFilter.EMBOSS)
+
+    # Save the embossed image
+    img1.save(filename1)
+
+    # Open embossed image in image browser
+    webbrowser.open(filename1)
 
     # Open the image in image browser
     webbrowser.open(filename)
