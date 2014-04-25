@@ -24,6 +24,8 @@ def main():
     # The second output image filename
     filename1 = "out1.jpg"
 
+    filename2 = "out2.jpg"
+
     # Iterate through rows of image
     for i in range(img.size[0]):
         row = int(i / 100)
@@ -45,8 +47,17 @@ def main():
     # Save the embossed image
     img1.save(filename1)
 
+    # Apply edge detection filter
+    img2 = img.filter(ImageFilter.FIND_EDGES)
+
+    # Save the edge detected image
+    img2.save(filename2)
+
     # Open embossed image in image browser
     webbrowser.open(filename1)
+
+    # Open edge detected image
+    webbrowser.open(filename2)
 
     # Open the image in image browser
     webbrowser.open(filename)
